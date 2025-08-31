@@ -18,6 +18,14 @@ from pathlib import Path
 from types import SimpleNamespace as config
 
 CHATGPT_API_KEY = os.getenv("CHATGPT_API_KEY")
+CHATGPT_API_BASE_URL = os.getenv("CHATGPT_API_BASE_URL")
+
+def _openai_kwargs(api_key):
+    """Build kwargs for OpenAI clients with optional base_url from env."""
+    kwargs = {"api_key": api_key}
+    if CHATGPT_API_BASE_URL:
+        kwargs["base_url"] = CHATGPT_API_BASE_URL
+    return kwargs
 
 def count_tokens(text, model=None):
     if not text:
@@ -28,7 +36,7 @@ def count_tokens(text, model=None):
 
 def ChatGPT_API_with_finish_reason(model, prompt, api_key=CHATGPT_API_KEY, chat_history=None):
     max_retries = 10
-    client = openai.OpenAI(api_key=api_key)
+    client = openai.OpenAI(**_openai_kwargs(api_key))
     for i in range(max_retries):
         try:
             if chat_history:
@@ -60,7 +68,7 @@ def ChatGPT_API_with_finish_reason(model, prompt, api_key=CHATGPT_API_KEY, chat_
 
 def ChatGPT_API(model, prompt, api_key=CHATGPT_API_KEY, chat_history=None):
     max_retries = 10
-    client = openai.OpenAI(api_key=api_key)
+    client = openai.OpenAI(**_openai_kwargs(api_key))
     for i in range(max_retries):
         try:
             if chat_history:
@@ -91,7 +99,7 @@ async def ChatGPT_API_async(model, prompt, api_key=CHATGPT_API_KEY):
     messages = [{"role": "user", "content": prompt}]
     for i in range(max_retries):
         try:
-            async with openai.AsyncOpenAI(api_key=api_key) as client:
+            async with openai.AsyncOpenAI(**_openai_kwargs(api_key)) as client:
                 response = await client.chat.completions.create(
                     model=model,
                     messages=messages,
