@@ -1,9 +1,9 @@
 <div align="center">
-  
+
   <a href="https://vectify.ai/pageindex" target="_blank">
     <img src="https://github.com/user-attachments/assets/46201e72-675b-43bc-bfbd-081cc6b65a1d" alt="PageIndex Banner" />
   </a>
-  
+
   <br/>
   <br/>
 
@@ -16,16 +16,16 @@
   <a href="https://discord.com/invite/VuXuf29EUj">💬 Discord</a>&nbsp; • &nbsp;
   <a href="https://ii2abc2jejf.typeform.com/to/tK3AXl8T">✉️ Contact</a>&nbsp;
 </p>
-  
+
 </div>
 
 ---
 
-#  📄 Introduction to PageIndex
+# 📄 Introduction to PageIndex
 
-Are you frustrated with vector database retrieval accuracy for long professional documents? Traditional vector-based RAG relies on semantic *similarity* rather than true *relevance*. But **similarity ≠ relevance** — what we truly need in retrieval is **relevance**, and that requires **reasoning**. When working with professional documents that demand domain expertise and multi-step reasoning, similarity search often falls short.
+Are you frustrated with vector database retrieval accuracy for long professional documents? Traditional vector-based RAG relies on semantic _similarity_ rather than true _relevance_. But **similarity ≠ relevance** — what we truly need in retrieval is **relevance**, and that requires **reasoning**. When working with professional documents that demand domain expertise and multi-step reasoning, similarity search often falls short.
 
-Inspired by AlphaGo, we propose [PageIndex](https://vectify.ai/pageindex), a **reasoning-based RAG** system that simulates how **human experts** navigate and extract knowledge from long documents through **tree search**, enabling LLMs to *think* and *reason* their way to the most relevant document sections. It performs retrieval in two steps:
+Inspired by AlphaGo, we propose [PageIndex](https://vectify.ai/pageindex), a **reasoning-based RAG** system that simulates how **human experts** navigate and extract knowledge from long documents through **tree search**, enabling LLMs to _think_ and _reason_ their way to the most relevant document sections. It performs retrieval in two steps:
 
 1. Generate a "Table-of-Contents" **tree structure index** of documents
 2. Perform reasoning-based retrieval through **tree search**
@@ -34,9 +34,10 @@ Inspired by AlphaGo, we propose [PageIndex](https://vectify.ai/pageindex), a *
     <img src="https://docs.pageindex.ai/images/cookbook/vectorless-rag.png" width="90%">
 </div>
 
-### 💡 Features 
+### 💡 Features
 
 Compared to traditional vector-based RAG, PageIndex features:
+
 - **No Vectors Needed**: Uses document structure and LLM reasoning for retrieval.
 - **No Chunking Needed**: Documents are organized into natural sections, not artificial chunks.
 - **Human-like Retrieval**: Simulates how human experts navigate and extract knowledge from complex documents.
@@ -45,12 +46,14 @@ Compared to traditional vector-based RAG, PageIndex features:
 PageIndex powers a reasoning-based RAG system that achieved [98.7% accuracy](https://github.com/VectifyAI/Mafin2.5-FinanceBench) on FinanceBench, showing state-of-the-art performance in professional document analysis (see our [blog post](https://vectify.ai/blog/Mafin2.5) for details).
 
 ### 🚀 Deployment Options
+
 - 🛠️ Self-host — run locally with this open-source repo
 - ☁️ **[Cloud Service](https://dash.pageindex.ai/)** — try instantly with our 🖥️ [Dashboard](https://dash.pageindex.ai/) or 🔌 [API](https://docs.pageindex.ai/quickstart), no setup required
 
 ### ⚡ Quick Hands-on
 
-Check out this simple [*Vectorless RAG Notebook*](https://github.com/VectifyAI/PageIndex/blob/main/cookbook/pageindex_RAG_simple.ipynb) — a minimal, hands-on, reasoning-based RAG pipeline using **PageIndex**.
+Check out this simple [_Vectorless RAG Notebook_](https://github.com/VectifyAI/PageIndex/blob/main/cookbook/pageindex_RAG_simple.ipynb) — a minimal, hands-on, reasoning-based RAG pipeline using **PageIndex**.
+
 <p align="center">
 <a href="https://colab.research.google.com/github/VectifyAI/PageIndex/blob/main/cookbook/pageindex_RAG_simple.ipynb">
     <img src="https://img.shields.io/badge/Open_In_Colab-Vectorless_RAG_With_PageIndex-orange?style=for-the-badge&logo=googlecolab" alt="Open in Colab"/>
@@ -60,7 +63,8 @@ Check out this simple [*Vectorless RAG Notebook*](https://github.com/VectifyAI/P
 ---
 
 # 📦 PageIndex Tree Structure
-PageIndex can transform lengthy PDF documents into a semantic **tree structure**, similar to a _"table of contents"_ but optimized for use with Large Language Models (LLMs). It's ideal for: financial reports, regulatory filings, academic textbooks, legal or technical manuals, and any document that exceeds LLM context limits.
+
+PageIndex can transform lengthy PDF documents into a semantic **tree structure**, similar to a *"table of contents"* but optimized for use with Large Language Models (LLMs). It's ideal for: financial reports, regulatory filings, academic textbooks, legal or technical manuals, and any document that exceeds LLM context limits.
 
 Here is an example output. See more [example documents](https://github.com/VectifyAI/PageIndex/tree/main/tests/pdfs) and [generated trees](https://github.com/VectifyAI/PageIndex/tree/main/tests/results).
 
@@ -92,7 +96,7 @@ Here is an example output. See more [example documents](https://github.com/Vecti
 ...
 ```
 
- You can either generate the PageIndex tree structure with this open-source repo or try our ☁️ **[Cloud Service](https://dash.pageindex.ai/)** — instantly accessible via our 🖥️ [Dashboard](https://dash.pageindex.ai/) or 🔌 [API](https://docs.pageindex.ai/quickstart), with no setup required.
+You can either generate the PageIndex tree structure with this open-source repo or try our ☁️ **[Cloud Service](https://dash.pageindex.ai/)** — instantly accessible via our 🖥️ [Dashboard](https://dash.pageindex.ai/) or 🔌 [API](https://docs.pageindex.ai/quickstart), with no setup required.
 
 ---
 
@@ -113,6 +117,14 @@ Create a `.env` file in the root directory and add your API key:
 ```bash
 CHATGPT_API_KEY=your_openai_key_here
 ```
+
+Optional: if you're using an OpenAI-compatible endpoint (self-hosted proxy, gateway, or vendor), set a custom API base URL:
+
+```bash
+CHATGPT_API_BASE_URL=https://your-openai-compatible-endpoint/v1
+```
+
+When set, PageIndex will automatically use this base URL for all Chat Completions requests.
 
 ### 3. Run PageIndex on your PDF
 
@@ -135,6 +147,7 @@ You can customize the processing with additional optional arguments:
 --if-add-node-summary   Add node summary (yes/no, default: no)
 --if-add-doc-description Add doc description (yes/no, default: yes)
 ```
+
 </details>
 
 ---
@@ -180,7 +193,7 @@ Refer to the [API Documentation](https://docs.pageindex.ai/quickstart) for integ
 
 # ⭐ Support Us
 
-Leave a star if you like our project — thank you!  
+Leave a star if you like our project — thank you!
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/eae4ff38-48ae-4a7c-b19f-eab81201d794" width="75%">
